@@ -1,77 +1,77 @@
-# 🔐 Cifrado y Descifrado con Fernet
+# Fernet Encryption and Decryption
 
-Script en Python que demuestra el **cifrado simétrico de contraseñas** usando el algoritmo **Fernet**, solicitando una clave al usuario, cifrándola y luego descifrándola.
+Python script that demonstrates **symmetric password encryption** using the **Fernet** algorithm, requesting a key from the user, encrypting it, and then decrypting it.
 
-Desarrollado para el curso de **Ética Hacking — 9° Semestre**.
-
----
-
-## 🎯 Propósito
-
-El cifrado es uno de los pilares fundamentales de la seguridad informática. Este script muestra:
-
-- 🔒 **Cómo proteger datos sensibles**: las contraseñas nunca deben guardarse en texto plano
-- 🔑 **Cifrado simétrico en la práctica**: misma clave para cifrar y descifrar
-- 🛡️ **Por qué Fernet es seguro**: combina AES-128 en modo CBC con HMAC-SHA256 para garantizar **confidencialidad** e **integridad**
-- ⚠️ **La importancia de gestionar las claves**: sin la clave, los datos son irrecuperables
+Developed for the **Ethical Hacking — 9th Semester** course.
 
 ---
 
-## 🔬 ¿Qué es Fernet?
+## Purpose
 
-**Fernet** es un esquema de cifrado simétrico autenticado definido en la librería `cryptography` de Python. Garantiza:
+Encryption is one of the fundamental pillars of information security. This script shows:
 
-| Propiedad | Mecanismo |
+- **How to protect sensitive data**: passwords should never be stored in plain text
+- **Symmetric encryption in practice**: the same key is used for encryption and decryption
+- **Why Fernet is secure**: it combines AES-128 in CBC mode with HMAC-SHA256 to guarantee **confidentiality** and **integrity**
+- **The importance of key management**: without the key, the data is unrecoverable
+
+---
+
+## What is Fernet?
+
+**Fernet** is an authenticated symmetric encryption scheme defined in Python's `cryptography` library. It guarantees:
+
+| Property | Mechanism |
 |---|---|
-| **Confidencialidad** | AES-128 en modo CBC |
-| **Integridad** | HMAC con SHA-256 |
-| **Autenticidad** | Firma del mensaje con timestamp |
-| **Resistencia a manipulación** | El token es inválido si es modificado |
+| **Confidentiality** | AES-128 in CBC mode |
+| **Integrity** | HMAC with SHA-256 |
+| **Authenticity** | Message signing with timestamp |
+| **Tamper resistance** | The token is invalid if modified |
 
 ---
 
-## ⚙️ ¿Cómo funciona?
+## How does it work?
 
 ```
-Inicio
-  └─ Generar clave Fernet aleatoria (256 bits en Base64)
-      └─ Solicitar contraseña al usuario
-          └─ Cifrar contraseña → token ilegible
-              └─ Descifrar token → texto original
-                  └─ Mostrar clave, token cifrado y resultado
-                      └─ Fin
+Start
+  └─ Generate random Fernet key (256 bits in Base64)
+      └─ Ask user for password
+          └─ Encrypt password → unreadable token
+              └─ Decrypt token → original text
+                  └─ Display key, encrypted token, and result
+                      └─ End
 ```
 
-### Funciones
+### Functions
 
-| Función | Qué hace |
+| Function | What it does |
 |---|---|
-| `generate_key()` | Genera una clave aleatoria de 32 bytes codificada en Base64 |
-| `encrypt_password(password, key)` | Cifra el texto con la clave Fernet |
-| `decrypt_password(encrypted_password, key)` | Descifra el token y retorna el texto original |
+| `generate_key()` | Generates a random 32-byte key encoded in Base64 |
+| `encrypt_password(password, key)` | Encrypts the text with the Fernet key |
+| `decrypt_password(encrypted_password, key)` | Decrypts the token and returns the original text |
 
 ---
 
-## 🖥️ Ejemplo de salida
+## Sample output
 
 ```
 Enter the password: MiContraseña123!
 
 --- Encryption Results ---
 Encryption key: dGhpcyBpcyBhIHZlcnkgbG9uZyBrZXkgZm9yIGZlcm5ldA==
-Encrypted password: gAAAAABmX3k2...  (token cifrado ilegible)
+Encrypted password: gAAAAABmX3k2...  (encrypted unreadable token)
 Decrypted password: MiContraseña123!
 ```
 
 ---
 
-## 🧰 Tecnologías
+## Technologies
 
-| Librería | Uso |
+| Library | Usage |
 |---|---|
-| `cryptography.fernet` | Implementación del esquema de cifrado Fernet |
+| `cryptography.fernet` | Implementation of the Fernet encryption scheme |
 
-### Instalación
+### Installation
 
 ```bash
 pip install cryptography
@@ -79,7 +79,7 @@ pip install cryptography
 
 ---
 
-## 🚀 Cómo ejecutarlo
+## How to run it
 
 ```bash
 python desincriptar_fernet.py
@@ -87,20 +87,18 @@ python desincriptar_fernet.py
 
 ---
 
-## ⚠️ Consideraciones de seguridad importantes
+## Important security considerations
 
-> **La clave es lo más importante.** Si se pierde, los datos cifrados son irrecuperables.
+> **The key is the most important part.** If it is lost, the encrypted data is unrecoverable.
 
-En un sistema real, la clave Fernet debe:
-- 🗄️ Guardarse en un **gestor de secretos** (ej. AWS Secrets Manager, HashiCorp Vault)
-- 🚫 **Nunca** hardcodearse en el código fuente
-- 🔄 Rotarse periódicamente para minimizar el impacto de una filtración
+In a real system, the Fernet key should be:
+- Stored in a **secrets manager** (e.g., AWS Secrets Manager, HashiCorp Vault)
+- **Never** hardcoded in the source code
+- Rotated periodically to minimize the impact of a leak
 
 ---
 
-## 📚 Conceptos de seguridad aplicados
+## Applied security concepts
 
-- **Cifrado simétrico**: misma clave para cifrar y descifrar (vs. asimétrico como RSA)
-- **Cifrado autenticado**: garantiza que el mensaje no fue alterado (AEAD)
-- **Gestión de claves (Key Management)**: uno de los mayores desafíos en criptografía aplicada
-- **Defense in depth**: proteger datos en tránsito y en reposo con cifrado
+- **Symmetric encryption**: same key for encryption and decryption (as opposed to asymmetric like RSA)
+- **Authenticated encryption**: guarantees that the message has not been altered (AEAD)
