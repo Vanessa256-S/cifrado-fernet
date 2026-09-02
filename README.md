@@ -2,7 +2,6 @@
 
 Python script that demonstrates **symmetric password encryption** using the **Fernet** algorithm, requesting a key from the user, encrypting it, and then decrypting it.
 
-Developed for the **Ethical Hacking — 9th Semester** course.
 
 ---
 
